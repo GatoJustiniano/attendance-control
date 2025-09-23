@@ -1,0 +1,72 @@
+# =========================
+# Archivos de compilación
+# =========================
+/build/
+**/build/
+bin/
+gen/
+out/
+
+# =========================
+# Archivos de Gradle
+# =========================
+.gradle/
+.gradle/**
+!gradle-wrapper.jar
+!gradle-wrapper.properties
+/local.properties
+
+# =========================
+# Archivos de Android Studio / IntelliJ
+# =========================
+# Ignora toda la carpeta .idea
+.idea/*
+
+# PERO permite configuraciones útiles del equipo
+!.idea/codeStyles/
+!.idea/inspectionProfiles/
+!.idea/runConfigurations/
+!.idea/vcs.xml
+
+# Archivos de proyecto que cambian en cada máquina
+*.iml
+*.ipr
+*.iws
+
+# =========================
+# Archivos empaquetados
+# =========================
+*.apk
+*.ap_
+*.aab
+*.aar
+*.dex
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# =========================
+# Archivos temporales / cachés
+# =========================
+*.log
+*.hprof
+captures/
+outputs/
+.cxx/
+.externalNativeBuild/
+
+# =========================
+# Claves / certificados
+# =========================
+*.jks
+*.keystore
+
+# =========================
+# Archivos del sistema
+# =========================
+.DS_Store
+Thumbs.db
