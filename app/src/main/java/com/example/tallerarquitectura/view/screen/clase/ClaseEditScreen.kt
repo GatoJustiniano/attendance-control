@@ -178,7 +178,7 @@ fun ClaseEditScreen(
 
 @Composable
 @Preview
-private fun ServiceNoteEditScreenPreview() {
+private fun ClaseEditScreenPreview() {
     val context = LocalContext.current
     val navHostController = rememberNavController()
     val uiAppViewModel = UiAppViewModel()

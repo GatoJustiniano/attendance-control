@@ -8,81 +8,83 @@ import com.example.tallerarquitectura.dto.Alumno
 import com.example.tallerarquitectura.dto.DetalleClase
 
 class DetalleClaseModel(
-    private val connection:AttendanceControlDbHelper=AttendanceControlDbHelper.getInstance()
-){
-    fun getByClaseId(clase_id: Long): List<DetalleClase> {
+    private val connection: AttendanceControlDbHelper = AttendanceControlDbHelper.getInstance()
+) {
+
+    fun getByClaseId(claseId: Long): List<DetalleClase> {
         val db = connection.readableDatabase
-        val query=db.rawQuery(
+        val query = db.rawQuery(
             """
-                SELECT 
-                * 
+                SELECT * 
                 FROM ${AttendanceControlData.DetalleClase.TABLE_NAME}
-                JOIN ${AttendanceControlData.Alumno.TABLE_NAME} ON ${AttendanceControlData.DetalleClase.COLUMN_NAME_ALUMNO_ID} = ${AttendanceControlData.Alumno.COLUMN_NAME_ID}
+                JOIN ${AttendanceControlData.Alumno.TABLE_NAME}
+                ON ${AttendanceControlData.DetalleClase.COLUMN_NAME_ALUMNO_ID} = ${AttendanceControlData.Alumno.COLUMN_NAME_ID}
                 WHERE ${AttendanceControlData.DetalleClase.COLUMN_NAME_CLASE_ID} = ?
-                
-            """.trimIndent(),arrayOf(clase_id.toString())
+            """.trimIndent(),
+            arrayOf(claseId.toString())
         )
-        val serviceNoteDetails = mutableListOf<DetalleClase>()
-        return query.use {
-            val clase_id= it.getColumnIndexOrThrow(AttendanceControlData.DetalleClase.COLUMN_NAME_CLASE_ID)
-            val alumno_code= it.getColumnIndexOrThrow(AttendanceControlData.DetalleClase.COLUMN_NAME_CODE)
-            val detallaClaseAlumno= it.getColumnIndexOrThrow(AttendanceControlData.DetalleClase.COLUMN_NAME_ALUMNO_ID)
 
-            val alumno_id= it.getColumnIndexOrThrow(AttendanceControlData.Alumno.COLUMN_NAME_ID)
-            val alumno_name= it.getColumnIndexOrThrow(AttendanceControlData.Alumno.COLUMN_NAME_NAME)
-            val alumno_urlImage= it.getColumnIndexOrThrow(AttendanceControlData.Alumno.COLUMN_NAME_URL_IMAGE)
+        val detalleClaseList = mutableListOf<DetalleClase>()
 
-            while (it.moveToNext()) {
-                val detalleClase = DetalleClase(
-                    clase_id = it.getLong(clase_id),
-                    alumno_id = it.getLong(detallaClaseAlumno),
-                    code = it.getInt(alumno_code),
+        return query.use { cursor ->
+            val idxClaseId = cursor.getColumnIndexOrThrow(AttendanceControlData.DetalleClase.COLUMN_NAME_CLASE_ID)
+            val idxAlumnoCode = cursor.getColumnIndexOrThrow(AttendanceControlData.DetalleClase.COLUMN_NAME_CODE)
+            val idxDetalleClaseAlumno = cursor.getColumnIndexOrThrow(AttendanceControlData.DetalleClase.COLUMN_NAME_ALUMNO_ID)
+
+            val idxAlumnoId = cursor.getColumnIndexOrThrow(AttendanceControlData.Alumno.COLUMN_NAME_ID)
+            val idxAlumnoName = cursor.getColumnIndexOrThrow(AttendanceControlData.Alumno.COLUMN_NAME_NAME)
+            val idxAlumnoUrlImage = cursor.getColumnIndexOrThrow(AttendanceControlData.Alumno.COLUMN_NAME_URL_IMAGE)
+
+            while (cursor.moveToNext()) {
+                val detalle = DetalleClase(
+                    clase_id = cursor.getLong(idxClaseId),
+                    alumno_id = cursor.getLong(idxDetalleClaseAlumno),
+                    code = cursor.getInt(idxAlumnoCode),
                     alumno = Alumno(
-                        id = it.getLong(alumno_id),
-                        name = it.getString(alumno_name),
-                        urlImage = it.getStringOrNull(alumno_urlImage)
-                    ),
-
+                        id = cursor.getLong(idxAlumnoId),
+                        name = cursor.getString(idxAlumnoName),
+                        urlImage = cursor.getStringOrNull(idxAlumnoUrlImage)
+                    )
                 )
-                serviceNoteDetails.add(detalleClase)
+                detalleClaseList.add(detalle)
             }
-            serviceNoteDetails
+            detalleClaseList
         }
     }
 
-    fun getById(serviceNotId: Long,alumno_id: Long): DetalleClase? {
+    fun getById(claseId: Long, alumnoId: Long): DetalleClase? {
         val db = connection.readableDatabase
-        val query=db.rawQuery(
+        val query = db.rawQuery(
             """
-                SELECT 
-                * 
+                SELECT * 
                 FROM ${AttendanceControlData.DetalleClase.TABLE_NAME}
-                JOIN ${AttendanceControlData.Alumno.TABLE_NAME} ON ${AttendanceControlData.DetalleClase.COLUMN_NAME_ALUMNO_ID} = ${AttendanceControlData.Alumno.COLUMN_NAME_ID}
-                WHERE ${AttendanceControlData.DetalleClase.COLUMN_NAME_CLASE_ID} = ? AND
-                ${AttendanceControlData.DetalleClase.COLUMN_NAME_ALUMNO_ID} = ?
-                
-            """.trimIndent(),arrayOf(serviceNotId.toString(),alumno_id.toString())
+                JOIN ${AttendanceControlData.Alumno.TABLE_NAME}
+                ON ${AttendanceControlData.DetalleClase.COLUMN_NAME_ALUMNO_ID} = ${AttendanceControlData.Alumno.COLUMN_NAME_ID}
+                WHERE ${AttendanceControlData.DetalleClase.COLUMN_NAME_CLASE_ID} = ? 
+                  AND ${AttendanceControlData.DetalleClase.COLUMN_NAME_ALUMNO_ID} = ?
+            """.trimIndent(),
+            arrayOf(claseId.toString(), alumnoId.toString())
         )
-        return query.use {
-            val clase_id= it.getColumnIndexOrThrow(AttendanceControlData.DetalleClase.COLUMN_NAME_CLASE_ID)
-            val alumno_code= it.getColumnIndexOrThrow(AttendanceControlData.DetalleClase.COLUMN_NAME_CODE)
-            val detallaClaseAlumno= it.getColumnIndexOrThrow(AttendanceControlData.DetalleClase.COLUMN_NAME_ALUMNO_ID)
 
-            val alumno_id= it.getColumnIndexOrThrow(AttendanceControlData.Alumno.COLUMN_NAME_ID)
-            val alumno_name= it.getColumnIndexOrThrow(AttendanceControlData.Alumno.COLUMN_NAME_NAME)
-            val alumno_urlImage= it.getColumnIndexOrThrow(AttendanceControlData.Alumno.COLUMN_NAME_URL_IMAGE)
+        return query.use { cursor ->
+            val idxClaseId = cursor.getColumnIndexOrThrow(AttendanceControlData.DetalleClase.COLUMN_NAME_CLASE_ID)
+            val idxAlumnoCode = cursor.getColumnIndexOrThrow(AttendanceControlData.DetalleClase.COLUMN_NAME_CODE)
+            val idxDetalleClaseAlumno = cursor.getColumnIndexOrThrow(AttendanceControlData.DetalleClase.COLUMN_NAME_ALUMNO_ID)
 
-            if (it.moveToFirst()) {
+            val idxAlumnoId = cursor.getColumnIndexOrThrow(AttendanceControlData.Alumno.COLUMN_NAME_ID)
+            val idxAlumnoName = cursor.getColumnIndexOrThrow(AttendanceControlData.Alumno.COLUMN_NAME_NAME)
+            val idxAlumnoUrlImage = cursor.getColumnIndexOrThrow(AttendanceControlData.Alumno.COLUMN_NAME_URL_IMAGE)
+
+            if (cursor.moveToFirst()) {
                 DetalleClase(
-                    clase_id = it.getLong(clase_id),
-                    alumno_id = it.getLong(detallaClaseAlumno),
-                    code = it.getInt(alumno_code),
+                    clase_id = cursor.getLong(idxClaseId),
+                    alumno_id = cursor.getLong(idxDetalleClaseAlumno),
+                    code = cursor.getInt(idxAlumnoCode),
                     alumno = Alumno(
-                        id = it.getLong(alumno_id),
-                        name = it.getString(alumno_name),
-                        urlImage = it.getStringOrNull(alumno_urlImage)
-                    ),
-
+                        id = cursor.getLong(idxAlumnoId),
+                        name = cursor.getString(idxAlumnoName),
+                        urlImage = cursor.getStringOrNull(idxAlumnoUrlImage)
+                    )
                 )
             } else {
                 null
@@ -111,16 +113,16 @@ class DetalleClaseModel(
             AttendanceControlData.DetalleClase.TABLE_NAME,
             values,
             "${AttendanceControlData.DetalleClase.COLUMN_NAME_CLASE_ID} = ? AND ${AttendanceControlData.DetalleClase.COLUMN_NAME_ALUMNO_ID} = ?",
-            arrayOf(detalleClase.clase_id.toString(),detalleClase.alumno_id.toString())
+            arrayOf(detalleClase.clase_id.toString(), detalleClase.alumno_id.toString())
         )
     }
 
-    fun delete(clase_id: Long,alumno_id: Long): Int {
+    fun delete(claseId: Long, alumnoId: Long): Int {
         val db = connection.writableDatabase
         return db.delete(
             AttendanceControlData.DetalleClase.TABLE_NAME,
             "${AttendanceControlData.DetalleClase.COLUMN_NAME_CLASE_ID} = ? AND ${AttendanceControlData.DetalleClase.COLUMN_NAME_ALUMNO_ID} = ?",
-            arrayOf(clase_id.toString(),alumno_id.toString())
+            arrayOf(claseId.toString(), alumnoId.toString())
         )
     }
 }

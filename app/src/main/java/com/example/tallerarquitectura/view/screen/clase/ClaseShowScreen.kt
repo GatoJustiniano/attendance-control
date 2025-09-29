@@ -172,6 +172,58 @@ fun ClaseShowScreen(
 
 
 @Composable
+@Preview(showBackground = true)
+fun PreviewClaseShowScreen() {
+    val context = LocalContext.current
+    val navHostController = rememberNavController()
+    val uiAppViewModel = UiAppViewModel()
+    val uiProvider = UiProvider(uiAppViewModel)
+    ClaseShowScreen(
+
+        clase = Clase(
+            id = 2591,
+            classDate = "varius",
+            classCreate = "varius",
+            qrCode = "suscipit",
+            grupo = null,
+            nateria = Materia(
+                id = 1657, name = "Pat Fletcher"
+            ),
+            horario = Horario(1, "pr", starttime = "10", endtime = "11"),
+            detail = listOf(
+                DetalleClase(
+                    code = 1463,
+                    alumno_id = 4669,
+                    clase_id = 1,
+                    alumno = Alumno(
+                        id = 4669,
+                        name = "Kathrine Kemp",
+                        urlImage = "otro"
+                    )
+                )
+            )
+
+        ),
+
+        listener = ClaseController(
+            claseModel = ClaseModel(
+                DetalleClaseModel(
+                    AttendanceControlDbHelper.getInstance(
+                        context
+                    )
+                ), AttendanceControlDbHelper.getInstance(context)
+            ),
+            materiaModel = MateriaModel(AttendanceControlDbHelper.getInstance(context)),
+            horarioModel = HorarioModel(AttendanceControlDbHelper.getInstance(context)),
+            alumnoModel = AlumnoModel(AttendanceControlDbHelper.getInstance(context)),
+            grupoModel = GrupoModel(AttendanceControlDbHelper.getInstance(context)),
+            view = View(uiProvider)
+        ),
+        uiProvider = uiProvider,
+    )
+}
+
+@Composable
 fun ClaseItemCard(
     detalleClase: DetalleClase,
     onDeleteDetail: (DetalleClase) -> Unit,

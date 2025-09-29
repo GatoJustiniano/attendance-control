@@ -175,7 +175,7 @@ private fun SelectDropdownMenuAlumno(
 
 @Composable
 @Preview
-private fun ServiceNoteDetailCreateScreenPreview() {
+private fun DetalleClaseCreateScreenPreview() {
     val context = LocalContext.current
     val navHostController = rememberNavController()
     val uiAppViewModel = UiAppViewModel()
