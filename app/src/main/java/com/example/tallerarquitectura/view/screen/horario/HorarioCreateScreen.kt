@@ -34,6 +34,9 @@ import com.example.tallerarquitectura.dto.Horario
 import com.example.tallerarquitectura.validation.horarioFormValidate
 import com.example.tallerarquitectura.controller.ControllerProvider
 import com.example.tallerarquitectura.ui.UiAppViewModel
+import com.example.tallerarquitectura.view.screen.clase.DatePickerFieldToModal
+import com.example.tallerarquitectura.view.screen.clase.convertMillisToDateDb
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -140,4 +143,62 @@ private fun CarCreateScreenPreview() {
         ControllerProvider().horarioController,
         uiProvider = uiProvider
     )
+}
+
+@Composable
+fun DatePickerFieldToModal(
+    modifier: Modifier = Modifier,
+    initialDate: Long=LocalDate.now().atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli(),
+    onDateSelected: (Long) -> Unit,
+) {
+    var selectedDate by remember { mutableLongStateOf(initialDate) }
+    var showModal by remember { mutableStateOf(false) }
+
+    OutlinedTextField(
+        value = //selectedDate.toString(),
+        convertMillisToDate(selectedDate),
+        onValueChange = { },
+        label = { Text("Fecha") },
+        placeholder = { Text("MM/DD/YYYY") },
+        trailingIcon = {
+            Icon(Icons.Default.DateRange, contentDescription = "Seleccione Fecha")
+        },
+        modifier = modifier
+            .fillMaxWidth()
+            .pointerInput(selectedDate) {
+                awaitEachGesture {
+                    // Modifier.clickable doesn't work for text fields, so we use Modifier.pointerInput
+                    // in the Initial pass to observe events before the text field consumes them
+                    // in the Main pass.
+                    awaitFirstDown(pass = PointerEventPass.Initial)
+                    val upEvent = waitForUpOrCancellation(pass = PointerEventPass.Initial)
+                    if (upEvent != null) {
+                        showModal = true
+                    }
+                }
+            }
+    )
+
+    if (showModal) {
+        DatePickerModal(
+            onDateSelected = {
+                val dateLocal=it?: LocalDate.now().atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
+                selectedDate = dateLocal
+                onDateSelected(dateLocal)
+            },
+            onDismiss = { showModal = false }
+        )
+    }
+}
+
+fun convertMillisToDate(millis: Long): String {
+    val formatter = SimpleDateFormat("dd/MM/yyyy",Locale.getDefault())
+    formatter.timeZone= TimeZone.getTimeZone("UTC")
+    return formatter.format(Date(millis))
+}
+
+fun convertMillisToDateDb(millis: Long): String {
+    val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    formatter.timeZone= TimeZone.getTimeZone("UTC")
+    return formatter.format(Date(millis))
 }

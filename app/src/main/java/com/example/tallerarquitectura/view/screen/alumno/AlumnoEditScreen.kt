@@ -86,7 +86,7 @@ fun AlumnoEditScreen(
 
 
             Text(
-                "Formulario de edicion",
+                "Formulario de actualización",
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
             )
             if (errors.value.any()) {

@@ -51,20 +51,17 @@ import com.example.tallerarquitectura.controller.ActionClaseListener
 import com.example.tallerarquitectura.controller.ClaseController
 import com.example.tallerarquitectura.dto.Horario
 import com.example.tallerarquitectura.dto.Alumno
-import com.example.tallerarquitectura.dto.ReminderNoteWithMeasureUnit
 import com.example.tallerarquitectura.dto.Materia
 import com.example.tallerarquitectura.dto.Clase
 import com.example.tallerarquitectura.dto.DetalleClase
 import com.example.tallerarquitectura.model.HorarioModel
 import com.example.tallerarquitectura.model.GrupoModel
 import com.example.tallerarquitectura.model.AlumnoModel
-import com.example.tallerarquitectura.model.ReminderNoteModel
 import com.example.tallerarquitectura.model.MateriaModel
 import com.example.tallerarquitectura.model.DetalleClaseModel
 import com.example.tallerarquitectura.model.ClaseModel
 import com.example.tallerarquitectura.ui.UiAppViewModel
 import com.example.tallerarquitectura.view.View
-import com.example.tallerarquitectura.view.navigation.ReminderNoteEditRoute
 import com.example.tallerarquitectura.view.navigation.DetalleClaseCreateRoute
 import com.example.tallerarquitectura.view.navigation.DetalleClaseEditRoute
 import kotlinx.coroutines.launch
@@ -98,7 +95,6 @@ fun ClaseShowScreen(
                     }
                 }) {
                     Icon(
-//                            imageVector = Icons.AutoMirrored.Default.ArrowBack,
                         imageVector = Icons.Filled.Menu, contentDescription = "Back"
                     )
                 }
@@ -114,10 +110,10 @@ fun ClaseShowScreen(
         ) {
             Column {
                 Text(
-                    "Detalle de nota de servicio",
+                    "Detalle Clase - Asistencia",
                     modifier = Modifier.padding(bottom = 16.dp, start = 16.dp)
                 )
-                ServiceNoteCard(
+                ClaseCard(
                     clase = clase,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -132,13 +128,13 @@ fun ClaseShowScreen(
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp)
                 ) {
-                    Text("Productos")
+                    Text("Alumnos")
                     TextButton(
                         onClick = {
                             MainActivity.navManager.navigateTo(DetalleClaseCreateRoute(clase.id))
                         },
                     ) {
-                        Text("Agregar")
+                        Text("Marcar")
                     }
                 }
                 LazyRow(
@@ -148,7 +144,7 @@ fun ClaseShowScreen(
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     items(clase.detail) { item ->
-                        ServiceNoteItemCard(item,
+                        ClaseItemCard(item,
                             onDeleteDetail = {
                                 coroutineScope.launch {
                                     listener.destroyDetail(
@@ -173,107 +169,9 @@ fun ClaseShowScreen(
     }
 }
 
-@Composable
-@Preview(showBackground = true)
-fun PreviewServiceNoteShowScreen() {
-    val context = LocalContext.current
-    val navHostController = rememberNavController()
-    val uiAppViewModel = UiAppViewModel()
-    val uiProvider = UiProvider(uiAppViewModel)
-    ClaseShowScreen(
-
-        clase = Clase(
-            id = 2591,
-            classDate = "varius",
-            classCreate = "varius",
-            qrCode = "suscipit",
-            horario = Horario(
-                id = 9551,
-                name = "tation",
-                starttime = "pretium",
-                endtime = "purus"
-            ),
-            grupo = null,
-            materia = Materia(
-                id = 1657, name = "Pat Fletcher"
-            ),
-            detail = listOf(
-                DetalleClase(
-                    code = 1463,
-                    alumno_id = 4669,
-                    clase_id = 1,
-                    alumno = Alumno(
-                        id = 4669,
-                        name = "Kathrine Kemp",
-                        detail = "id",
-                        urlImage = "http://www.bing.com/search?q=scripserit"
-                    )
-                ), DetalleClase(
-                    code = 1463,
-                    alumno_id = 4669,
-                    clase_id = 1,
-                    alumno = Alumno(
-                        id = 4669,
-                        name = "Kathrine Kemp",
-                        detail = "id",
-                        urlImage = "http://www.bing.com/search?q=scripserit"
-                    )
-                ), DetalleClase(
-                    code = 1463,
-                    alumno_id = 4669,
-                    clase_id = 1,
-                    alumno = Alumno(
-                        id = 4669,
-                        name = "Kathrine Kemp",
-                        detail = "id",
-                        urlImage = "http://www.bing.com/search?q=scripserit"
-                    )
-                ), DetalleClase(
-                    code = 1463,
-                    alumno_id = 4669,
-                    clase_id = 1,
-                    alumno = Alumno(
-                        id = 4669,
-                        name = "Kathrine Kemp",
-                        detail = "id",
-                        urlImage = "http://www.bing.com/search?q=scripserit"
-                    )
-                ), DetalleClase(
-                    code = 1463,
-                    alumno_id = 4669,
-                    clase_id = 1,
-                    alumno = Alumno(
-                        id = 4669,
-                        name = "Kathrine Kemp",
-                        detail = "id",
-                        urlImage = "http://www.bing.com/search?q=scripserit"
-                    )
-                )
-
-            ),
-
-        ),
-
-        listener = ClaseController(
-            claseModel = ClaseModel(
-                DetalleClaseModel(
-                    AttendanceControlDbHelper.getInstance(
-                        context
-                    )
-                ), AttendanceControlDbHelper.getInstance(context)
-            ),
-            materiaModel = MateriaModel(AttendanceControlDbHelper.getInstance(context)),
-            horarioModel = HorarioModel(AttendanceControlDbHelper.getInstance(context)),
-            alumnoModel = AlumnoModel(AttendanceControlDbHelper.getInstance(context)),
-            grupoModel = GrupoModel(AttendanceControlDbHelper.getInstance(context)),
-            view = View(uiProvider)
-        ),
-        uiProvider = uiProvider,
-    )
-}
 
 @Composable
-fun ServiceNoteItemCard(
+fun ClaseItemCard(
     detalleClase: DetalleClase,
     onDeleteDetail: (DetalleClase) -> Unit,
     onSelectDetail:(DetalleClase) -> Unit
@@ -310,10 +208,6 @@ fun ServiceNoteItemCard(
                         modifier = Modifier.size(20.dp)
                     )
                 }
-                Text(
-                    text = "Un.${detalleClase.code}",
-                    style = MaterialTheme.typography.bodySmall
-                )
             }
         }
         Column(

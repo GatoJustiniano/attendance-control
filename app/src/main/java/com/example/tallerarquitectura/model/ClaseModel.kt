@@ -9,7 +9,6 @@ import com.example.tallerarquitectura.dblocal.AttendanceControlData
 import com.example.tallerarquitectura.dblocal.AttendanceControlDbHelper
 import com.example.tallerarquitectura.dto.Horario
 import com.example.tallerarquitectura.dto.Grupo
-import com.example.tallerarquitectura.dto.ReminderNoteWithMeasureUnit
 import com.example.tallerarquitectura.dto.Materia
 import com.example.tallerarquitectura.dto.Clase
 import com.example.tallerarquitectura.dto.DetalleClase

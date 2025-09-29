@@ -59,7 +59,7 @@ class ClaseController(
             val clase = claseModel.getById(id)
             if (clase == null) {
                 return view.render {
-                    NotFoundScreen("No se encontro la nota de servicio", view.getUiProvider())
+                    NotFoundScreen("No se encontro la clase", view.getUiProvider())
                 }
             }
             val materias = materiaModel.getAll()

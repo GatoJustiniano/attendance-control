@@ -4,9 +4,7 @@ import android.content.Context
 import com.example.tallerarquitectura.MainActivity
 import com.example.tallerarquitectura.model.HorarioModel
 import com.example.tallerarquitectura.model.GrupoModel
-import com.example.tallerarquitectura.model.MeasureUnitModel
 import com.example.tallerarquitectura.model.AlumnoModel
-import com.example.tallerarquitectura.model.ReminderNoteModel
 import com.example.tallerarquitectura.model.MateriaModel
 import com.example.tallerarquitectura.model.ClaseModel
 import com.example.tallerarquitectura.view.View

@@ -33,6 +33,9 @@ import com.example.tallerarquitectura.dto.Horario
 import com.example.tallerarquitectura.validation.horarioFormValidate
 import com.example.tallerarquitectura.controller.ControllerProvider
 import com.example.tallerarquitectura.ui.UiAppViewModel
+import com.example.tallerarquitectura.view.screen.horario.DatePickerFieldToModal
+import com.example.tallerarquitectura.view.screen.horario.convertMillisToDateDb
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -88,7 +91,7 @@ fun HorarioEditScreen(
 
 
             Text(
-                "Formulario de edición",
+                "Formulario de actualización",
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
             )
             if (errors.value.any()) {

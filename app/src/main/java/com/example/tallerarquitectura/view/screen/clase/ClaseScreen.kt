@@ -76,7 +76,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun ClaseScreen(
-    serviceNotes: List<Clase> = emptyList<Clase>(),
+    clases: List<Clase> = emptyList<Clase>(),
     listener: ActionClaseListener,
     uiProvider: UiProvider
 ) {
@@ -103,7 +103,6 @@ fun ClaseScreen(
                     }
                 }) {
                     Icon(
-//                            imageVector = Icons.AutoMirrored.Default.ArrowBack,
                         imageVector = Icons.Filled.Menu, contentDescription = "Back"
                     )
                 }
@@ -158,7 +157,7 @@ fun ClaseScreen(
             LazyColumn(
 
             ) {
-                items(serviceNotes) {
+                items(clases) {
                     Box(
                         modifier = Modifier
                             .combinedClickable(
@@ -187,7 +186,7 @@ fun ClaseScreen(
                                 }
                             )
                     ) {
-                        ServiceNoteCard(
+                        ClaseCard(
                             clase = it,
                             showButtonDetail = true,
                             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
@@ -204,7 +203,7 @@ fun ClaseScreen(
 
 
 @Composable
-fun ServiceNoteCard(
+fun ClaseCard(
     clase: Clase,
     modifier: Modifier,
     showButtonDetail: Boolean=false,
@@ -240,33 +239,13 @@ fun ServiceNoteCard(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Company
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.outline_car_repair), // Replace with your company icon
-                    contentDescription = "Company Icon",
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(24.dp)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = clase.grupo?.name ?: "Sin taller",
-                    style = MaterialTheme.typography.bodyLarge,
-                )
-            }
-
-            Spacer(modifier = Modifier.height(8.dp))
-
             // Materia
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.outline_settings), // Replace with your materia icon
+                    painter = painterResource(id = R.drawable.outline_settings),
                     contentDescription = "Materia Icon",
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(24.dp)
@@ -277,17 +256,38 @@ fun ServiceNoteCard(
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
-
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Vehicle
+            // Grupo
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.outline_directions_car), // Replace with your vehicle icon
-                    contentDescription = "Vehicle Icon",
+                    painter = painterResource(id = R.drawable.outline_settings),
+                    contentDescription = "Grupo Icon",
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(24.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = clase.grupo?.name ?: "Sin grupo",
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+            }
+
+            
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Horario
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.outline_settings),
+                    contentDescription = "Horario Icon",
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(24.dp)
                 )
@@ -327,7 +327,7 @@ fun AttachmentDisplay(attachment: Any?) {
                 )
             }
 
-            is Int -> { // Assuming you pass an image resource id.
+            is Int -> {
                 Image(
                     painter = painterResource(id = attachment),
                     contentDescription = "Sin archivo abjunto.",
@@ -343,7 +343,7 @@ fun AttachmentDisplay(attachment: Any?) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_launcher_foreground), // Replace with your file icon
+                        painter = painterResource(id = R.drawable.ic_launcher_foreground),
                         contentDescription = "File Icon",
                         tint = Color.Gray,
                         modifier = Modifier.size(48.dp)
@@ -372,78 +372,4 @@ fun AttachmentDisplay(attachment: Any?) {
             color = Color.Gray
         )
     }
-}
-
-
-@Composable
-@Preview(showBackground = true)
-private fun ServiceNoteScreenPreview() {
-    val data = listOf<Clase>(
-        Clase(
-            1, "2024-04-10", "2024-04-10", "54545", "",
-            horario = Horario(
-                1,
-                "6565",
-                "no detail",
-                "no detail",
-                "no detail",
-                "no detail",
-                "no detail",
-                1323
-            ),
-            materia = Materia(1, "no name", ""),
-            grupo = null
-        ),
-        Clase(
-            2, "2024-04-10", "2024-04-10", "54545", "",
-            horario = Horario(
-                1,
-                "6565",
-                "no detail",
-                "no detail",
-                "no detail",
-                "no detail",
-                "no detail",
-                1323
-            ),
-            materia = Materia(1, "no name", ""),
-            grupo = null
-        ),
-        Clase(
-            3, "2024-04-10", "2024-04-10", "54545", "",
-            horario = Horario(
-                1,
-                "6565",
-                "no detail",
-                "no detail",
-                "no detail",
-                "no detail",
-                "no detail",
-                1323
-            ),
-            materia = Materia(1, "no name", ""),
-            grupo = null
-        )
-
-    )
-    val context = LocalContext.current
-    val navHostController = rememberNavController()
-    val uiAppViewModel = UiAppViewModel()
-    val uiProvider = UiProvider(uiAppViewModel)
-    ClaseScreen(
-        data,
-        listener = ClaseController(
-            claseModel = ClaseModel(DetalleClaseModel(
-                AttendanceControlDbHelper.getInstance(
-                    context
-                )
-            ),AttendanceControlDbHelper.getInstance(context)),
-            materiaModel = MateriaModel(AttendanceControlDbHelper.getInstance(context)),
-            horarioModel = HorarioModel(AttendanceControlDbHelper.getInstance(context)),
-            alumnoModel = AlumnoModel(AttendanceControlDbHelper.getInstance(context)),
-            grupoModel = GrupoModel(AttendanceControlDbHelper.getInstance(context)),
-            view = View(uiProvider)
-        ),
-        uiProvider = uiProvider
-    )
 }

@@ -17,7 +17,7 @@ object AttendanceControlData {
     }
 
     object Horario : BaseColumns {
-        const val TABLE_NAME = "Cars"
+        const val TABLE_NAME = "Horarios"
         const val COLUMN_NAME_ID = "nId"
         const val COLUMN_NAME_NAME = "sName"
         const val COLUMN_NAME_STARTTIME = "sStartTime"

@@ -55,7 +55,7 @@ fun DetalleClaseEditScreen(
 ) {
     val code = remember { mutableStateOf(detalleClase.code.toString()) }
 
-    val selectedProduct = remember { mutableStateOf<Alumno?>(detalleClase.alumno) }
+    val selectedAlumno = remember { mutableStateOf<Alumno?>(detalleClase.alumno) }
 
     val errors = remember { mutableStateOf<List<String>>(emptyList()) }
     val context = LocalContext.current
@@ -73,7 +73,7 @@ fun DetalleClaseEditScreen(
                 actions = {
 
                     TextButton(onClick = {
-                        val errorsForm = detalleClaseFormValidate(code=code.value,selectedProduct.value)
+                        val errorsForm = detalleClaseFormValidate(code=code.value,selectedAlumno.value)
                         if (errorsForm.any()) {
                             errors.value = errorsForm
                         } else {
@@ -81,9 +81,9 @@ fun DetalleClaseEditScreen(
                             listener.updateDetail(
                                     detalleClase = DetalleClase(
                                         code = code.value.toInt(),
-                                        alumno_id = selectedProduct.value!!.id,
+                                        alumno_id = selectedAlumno.value!!.id,
                                         clase_id = detalleClase.clase_id,
-                                        alumno = selectedProduct.value!!
+                                        alumno = selectedAlumno.value!!
                                     )
                             )
 
@@ -101,9 +101,8 @@ fun DetalleClaseEditScreen(
                 .padding(innerPadding)
         ) {
 
-
             Text(
-                "Formulario de creación",
+                "Formulario de actualización",
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
             )
             if (errors.value.any()) {
@@ -123,7 +122,7 @@ fun DetalleClaseEditScreen(
                 OutlinedTextField(
                     value = code.value,
                     onValueChange = { code.value = it },
-                    label = { Text("Cantidad") },
+                    label = { Text("Code") },
                     modifier = Modifier.fillMaxWidth(),
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
@@ -133,9 +132,9 @@ fun DetalleClaseEditScreen(
 
                 SelectDropdownMenuAlumno(
                     alumnos=alumnos,
-                    selectedTitle = selectedProduct.value?.name ?: ""
+                    selectedTitle = selectedAlumno.value?.name ?: ""
                 ) {
-                    selectedProduct.value = it
+                    selectedAlumno.value = it
                 }
 
             }

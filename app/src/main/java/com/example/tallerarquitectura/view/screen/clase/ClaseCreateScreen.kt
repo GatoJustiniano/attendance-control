@@ -52,8 +52,6 @@ import com.example.tallerarquitectura.model.ClaseModel
 import com.example.tallerarquitectura.validation.claseFormValidate
 import com.example.tallerarquitectura.ui.UiAppViewModel
 import com.example.tallerarquitectura.view.View
-import com.example.tallerarquitectura.view.screen.clase.DatePickerFieldToModal
-import com.example.tallerarquitectura.view.screen.clase.convertMillisToDateDb
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
