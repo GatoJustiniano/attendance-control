@@ -78,7 +78,7 @@ class AttendanceControlDbHelper(context: Context) :
             ${AttendanceControlData.DetalleClase.COLUMN_NAME_CLASE_ID} INTEGER NOT NULL,
             ${AttendanceControlData.DetalleClase.COLUMN_NAME_ALUMNO_ID} INTEGER NOT NULL,
             ${AttendanceControlData.DetalleClase.COLUMN_NAME_CODE} INTEGER NOT NULL,
-            ${AttendanceControlData.DetalleClase.COLUMN_NAME_MARK_DATE} TEXT DEFAULT (datetime('now','localtime')),
+            ${AttendanceControlData.DetalleClase.COLUMN_NAME_MARK_DATE} TEXT NULL,
             
             PRIMARY KEY(${AttendanceControlData.DetalleClase.COLUMN_NAME_CLASE_ID},${AttendanceControlData.DetalleClase.COLUMN_NAME_ALUMNO_ID}),
             

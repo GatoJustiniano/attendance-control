@@ -5,23 +5,23 @@ import com.example.tallerarquitectura.R
 object ModuleApp{
     val register=mutableListOf<Module>(
         Module(
-            icon = R.drawable.outline_settings,
-            name = "CRUD MATERIAS",
+            icon = R.drawable.outline_inventory,
+            name = "Materias",
             route = MateriaRoute
         ),
         Module(
-            icon = R.drawable.outline_car_repair,
-            name = "CRUD GRUPO",
+            icon = R.drawable.outline_inventory,
+            name = "Grupos",
             route = GrupoRoute
         ),
         Module(
-            icon = R.drawable.outline_directions_car,
-            name = "CRUD HORARIO",
+            icon = R.drawable.outline_inventory,
+            name = "Horarios",
             route = HorarioRoute
         ),
         Module(
-            icon = R.drawable.outline_shopping_cart,
-            name = "CRUD ALUMNO",
+            icon = R.drawable.outline_inventory,
+            name = "Alumnos",
             route = AlumnoRoute
         ),
     )

@@ -159,7 +159,7 @@ private fun SelectDropdownMenuAlumno(
     }
     ContentDropdownMenu(
         expanded = expanded.value,
-        title = "Productos",
+        title = "Alumnos",
         selectedTitle = selectedTitle,
         onCloseExpanded = {
             expanded.value = it

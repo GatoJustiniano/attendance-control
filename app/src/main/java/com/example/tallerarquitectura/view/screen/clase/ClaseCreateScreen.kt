@@ -160,7 +160,7 @@ fun ClaseCreateScreen(
                 OutlinedTextField(
                     value = qrCode.value,
                     onValueChange = { qrCode.value = it },
-                    label = { Text("Código de comprobante") },
+                    label = { Text("Código de clase") },
                     modifier = Modifier.fillMaxWidth(),
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
@@ -220,7 +220,7 @@ fun ContentDropdownMenu(
                 .fillMaxWidth(),
             value = selectedTitle,
             placeholder = {
-                Text("Seleccione un elemento")
+                Text("Seleccione un alumno")
             },
             onValueChange = {},
             label = {
@@ -260,7 +260,7 @@ fun SelectDropdownMenuMateria(
     }
     ContentDropdownMenu(
         expanded = expanded.value,
-        title = "Servicios",
+        title = "Materias",
         selectedTitle = selectedTitle,
         onCloseExpanded = {
             expanded.value = it
@@ -293,7 +293,7 @@ fun SelectDropdownMenuHorario(
     }
     ContentDropdownMenu(
         expanded = expanded.value,
-        title = "Servicios",
+        title = "Horarios",
         selectedTitle = selectedTitle,
         onCloseExpanded = {
             expanded.value = it
@@ -327,7 +327,7 @@ fun SelectDropdownMenuGrupo(
     }
     ContentDropdownMenu(
         expanded = expanded.value,
-        title = "Talleres",
+        title = "Grupos",
         selectedTitle = selectedTitle,
         onCloseExpanded = {
             expanded.value = it

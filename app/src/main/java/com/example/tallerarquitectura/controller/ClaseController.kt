@@ -187,7 +187,7 @@ class ClaseController(
             val detalleClase = claseModel.getDetail(clase_id,alumno_id)
             if (detalleClase == null) {
                 return view.render {
-                    NotFoundScreen("No se encontro el detalle de la nota de servicio", view.getUiProvider())
+                    NotFoundScreen("No se encontro el detalle de la clases", view.getUiProvider())
                 }
             }
             val alumnos = alumnoModel.getAll()
