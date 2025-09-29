@@ -2,50 +2,37 @@ package com.example.tallerarquitectura.controller
 
 import android.content.Context
 import com.example.tallerarquitectura.MainActivity
-import com.example.tallerarquitectura.model.CarModel
-import com.example.tallerarquitectura.model.EnterpriseModel
+import com.example.tallerarquitectura.model.HorarioModel
+import com.example.tallerarquitectura.model.GrupoModel
 import com.example.tallerarquitectura.model.MeasureUnitModel
-import com.example.tallerarquitectura.model.ProductModel
+import com.example.tallerarquitectura.model.AlumnoModel
 import com.example.tallerarquitectura.model.ReminderNoteModel
-import com.example.tallerarquitectura.model.ServiceModel
-import com.example.tallerarquitectura.model.ServiceNoteModel
+import com.example.tallerarquitectura.model.MateriaModel
+import com.example.tallerarquitectura.model.ClaseModel
 import com.example.tallerarquitectura.view.View
 
 class ControllerProvider(
     private val context: Context = MainActivity.Companion.appContext
 ) {
-    val measureUnitController= MeasureUnitController(
-        measureUnitModel = MeasureUnitModel(),
-        view = View()
-    )
 
-    val serviceController = ServiceController(
-        serviceModel = ServiceModel(),
+    val grupoController = GrupoController(
+        grupoModel = GrupoModel(),
         view = View()
     )
-    val enterpriseController = EnterpriseController(
-        enterpriseModel = EnterpriseModel(),
+    val horarioController = HorarioController(
+        horarioModel = HorarioModel(),
         view = View()
     )
-    val carController = CarController(
-        carModel = CarModel(),
+    val alumnoController= AlumnoController(
+        alumnoModel = AlumnoModel(),
         view = View()
     )
-    val productController= ProductController(
-        productModel = ProductModel(),
-        view = View()
-    )
-    val serviceNoteController= ServiceNoteController(
-        serviceNoteModel = ServiceNoteModel(),
-        serviceModel = ServiceModel(),
-        carModel = CarModel(),
-        enterpriseModel = EnterpriseModel(),
+    val claseController= ClaseController(
+        claseModel = ClaseModel(),
+        materiaModel = MateriaModel(),
+        horarioModel = HorarioModel(),
+        grupoModel = GrupoModel(),
         view = View(),
-        productModel = ProductModel(),
-    )
-    val reminderNoteController= ReminderNoteController(
-        reminderNoteModel = ReminderNoteModel(),
-        measureUnitModel = MeasureUnitModel(),
-        view = View()
+        alumnoModel = AlumnoModel(),
     )
 }

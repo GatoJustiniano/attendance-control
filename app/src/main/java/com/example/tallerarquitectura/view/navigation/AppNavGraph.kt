@@ -23,95 +23,72 @@ fun AppNavGraph(
         startDestination = startDestination,
     ) {
 
-        composable<MeasureUnitRoute> {
-            controllerProvider.measureUnitController.index()()
+        composable<MateriaRoute>{
+            controllerProvider.materiaController.index()()
         }
-        composable<MeasureUnitCreateRoute>{
-            controllerProvider.measureUnitController.create()()
+        composable<MateriaCreateRoute> {
+            controllerProvider.materiaController.create()()
         }
-        composable<MeasureUnitEditRoute>{
-            val measureUnitId=it.toRoute<MeasureUnitEditRoute>().id
-            controllerProvider.measureUnitController.edit(measureUnitId)()
-        }
-
-        composable<ServiceRoute>{
-            controllerProvider.serviceController.index()()
-        }
-        composable<ServiceCreateRoute> {
-            controllerProvider.serviceController.create()()
-        }
-        composable <ServiceEditRoute>{
-            val serviceId=it.toRoute<ServiceEditRoute>().id
-            controllerProvider.serviceController.edit(serviceId)()
+        composable <MateriaEditRoute>{
+            val materiaID=it.toRoute<MateriaEditRoute>().id
+            controllerProvider.materiaController.edit(materiaID)()
         }
 
-        composable<EnterpriseRoute>{
-            controllerProvider.enterpriseController.index()()
+        composable<GrupoRoute>{
+            controllerProvider.grupoController.index()()
         }
-        composable<EnterpriseCreateRoute> {
-            controllerProvider.enterpriseController.create()()
+        composable<GrupoCreateRoute> {
+            controllerProvider.grupoController.create()()
         }
-        composable <EnterpriseEditRoute>{
-            val serviceId=it.toRoute<EnterpriseEditRoute>().id
-            controllerProvider.enterpriseController.edit(serviceId)()
-        }
-
-        composable<CarRoute>{
-            controllerProvider.carController.index()()
-        }
-        composable<CarCreateRoute> {
-            controllerProvider.carController.create()()
-        }
-        composable <CarEditRoute>{
-            val carId=it.toRoute<CarEditRoute>().id
-            controllerProvider.carController.edit(carId)()
+        composable <GrupoEditRoute>{
+            val materiaID=it.toRoute<GrupoEditRoute>().id
+            controllerProvider.grupoController.edit(materiaID)()
         }
 
-        composable<ProductRoute>{
-            controllerProvider.productController.index()()
+        composable<HorarioRoute>{
+            controllerProvider.horarioController.index()()
         }
-        composable<ProductCreateRoute> {
-            controllerProvider.productController.create()()
+        composable<HorarioCreateRoute> {
+            controllerProvider.horarioController.create()()
         }
-        composable <ProductEditRoute>{
-            val carId=it.toRoute<CarEditRoute>().id
-            controllerProvider.productController.edit(carId)()
-        }
-
-        composable<ServiceNoteRoute> {
-            controllerProvider.serviceNoteController.index()()
-        }
-        composable <ServiceNoteCreateRoute>{
-            controllerProvider.serviceNoteController.create()()
-        }
-        composable <ServiceNoteEditRoute>{
-            val serviceNoteId=it.toRoute<ServiceNoteEditRoute>().id
-            controllerProvider.serviceNoteController.edit(serviceNoteId)()
-        }
-        composable <ServiceNoteShowRoute>{
-            val serviceNoteId=it.toRoute<ServiceNoteShowRoute>().id
-            controllerProvider.serviceNoteController.show(serviceNoteId)()
-        }
-        composable <ServiceNoteDetailCreateRoute>{
-            val serviceNoteId=it.toRoute<ServiceNoteDetailCreateRoute>().id
-            controllerProvider.serviceNoteController.createDetail(serviceNoteId)()
-        }
-        composable <ServiceNoteDetailEditRoute>{
-            val serviceNoteId=it.toRoute<ServiceNoteDetailEditRoute>().serviceNoteId
-            val productId=it.toRoute<ServiceNoteDetailEditRoute>().productId
-            controllerProvider.serviceNoteController.editDetail(serviceNoteId,productId)()
+        composable <HorarioEditRoute>{
+            val horarioID=it.toRoute<HorarioEditRoute>().id
+            controllerProvider.horarioController.edit(horarioID)()
         }
 
-        composable<ReminderNoteCreateRoute> {
-            val serviceNoteId=it.toRoute<ReminderNoteCreateRoute>().serviceNoteId
-            controllerProvider.reminderNoteController.create(serviceNoteId)()
+        composable<AlumnoRoute>{
+            controllerProvider.alumnoController.index()()
         }
-        composable<ReminderNoteRoute> {
-            controllerProvider.reminderNoteController.index()()
+        composable<AlumnoCreateRoute> {
+            controllerProvider.alumnoController.create()()
         }
-        composable<ReminderNoteEditRoute> {
-            val serviceNoteId=it.toRoute<ReminderNoteEditRoute>().serviceNoteId
-            controllerProvider.reminderNoteController.edit(serviceNoteId)()
+        composable <AlumnoEditRoute>{
+            val horarioID=it.toRoute<HorarioEditRoute>().id
+            controllerProvider.alumnoController.edit(horarioID)()
+        }
+
+        composable<ClaseRoute> {
+            controllerProvider.claseController.index()()
+        }
+        composable <ClaseCreateRoute>{
+            controllerProvider.claseController.create()()
+        }
+        composable <ClaseEditRoute>{
+            val clase_id=it.toRoute<ClaseEditRoute>().id
+            controllerProvider.claseController.edit(clase_id)()
+        }
+        composable <ClaseShowRoute>{
+            val clase_id=it.toRoute<ClaseShowRoute>().id
+            controllerProvider.claseController.show(clase_id)()
+        }
+        composable <DetalleClaseCreateRoute>{
+            val clase_id=it.toRoute<DetalleClaseCreateRoute>().id
+            controllerProvider.claseController.createDetail(clase_id)()
+        }
+        composable <DetalleClaseEditRoute>{
+            val clase_id=it.toRoute<DetalleClaseEditRoute>().clase_id
+            val alumno_id=it.toRoute<DetalleClaseEditRoute>().alumno_id
+            controllerProvider.claseController.editDetail(clase_id,alumno_id)()
         }
 
     }
@@ -124,7 +101,7 @@ private fun ShowInQueueNavGraph(){
 
     AppNavGraph(
         navController = rememberNavController(),
-        startDestination = MeasureUnitRoute,
+        startDestination = MateriaRoute,
         controllerProvider = ControllerProvider()
     )
 }

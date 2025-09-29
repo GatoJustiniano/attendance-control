@@ -67,7 +67,7 @@ private fun ShowInternalErrorScreen() {
     val uiAppViewModel= UiAppViewModel()
     val uiProvider= UiProvider(uiAppViewModel)
     InternalErrorScreen(
-        message = "Error al editar unidad de medida",
+        message = "Error al editar",
         uiProvider=uiProvider
     )
 }

@@ -67,7 +67,7 @@ private fun ShowNotFoundScreen() {
     val uiAppViewModel= UiAppViewModel()
     val uiProvider= UiProvider(uiAppViewModel)
     NotFoundScreen(
-        message = "Unidad de Medida no encontrada.",
+        message = "Página no encontrada.",
         uiProvider
     )
 }

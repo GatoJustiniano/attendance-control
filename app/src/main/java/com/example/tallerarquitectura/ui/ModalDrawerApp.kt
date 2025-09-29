@@ -26,7 +26,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import com.example.tallerarquitectura.view.navigation.ModuleApp
 import com.example.tallerarquitectura.view.navigation.ReminderNoteRoute
-import com.example.tallerarquitectura.view.navigation.ServiceNoteRoute
+import com.example.tallerarquitectura.view.navigation.ClaseRoute
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -80,7 +80,7 @@ fun ModalDrawerApp(
                 selected = false,
                 icon = { Icon(Icons.Outlined.Settings, contentDescription = null) },
                 onClick = {
-                    onNavigateToRoute(ServiceNoteRoute)
+                    onNavigateToRoute(ClaseRoute)
                     onCloseDrawer()
                 }
             )

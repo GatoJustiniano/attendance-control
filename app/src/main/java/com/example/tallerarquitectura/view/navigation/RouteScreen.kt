@@ -2,104 +2,78 @@ package com.example.tallerarquitectura.view.navigation
 
 import kotlinx.serialization.Serializable
 
-//MeasureUnit
+//Materia
 @Serializable
-object MeasureUnitRoute
+object MateriaRoute
 
 @Serializable
-object MeasureUnitCreateRoute
+object MateriaCreateRoute
 
 @Serializable
-data class MeasureUnitEditRoute(
+data class MateriaEditRoute(
     val id: Long
 )
 
-//Service
+//Grupo
 @Serializable
-object ServiceRoute
+object GrupoRoute
 
 @Serializable
-object ServiceCreateRoute
+object GrupoCreateRoute
 
 @Serializable
-data class ServiceEditRoute(
+data class GrupoEditRoute(
     val id: Long
 )
 
-//Enterprise
+//Horario
 @Serializable
-object EnterpriseRoute
+object HorarioRoute
 
 @Serializable
-object EnterpriseCreateRoute
+object HorarioCreateRoute
 
 @Serializable
-data class EnterpriseEditRoute(
+data class HorarioEditRoute(
     val id: Long
 )
 
-//Car
+//Alumno
 @Serializable
-object CarRoute
+object AlumnoRoute
 
 @Serializable
-object CarCreateRoute
+object AlumnoCreateRoute
 
 @Serializable
-data class CarEditRoute(
-    val id: Long
-)
-
-//Product
-@Serializable
-object ProductRoute
-
-@Serializable
-object ProductCreateRoute
-
-@Serializable
-data class ProductEditRoute(
+data class AlumnoEditRoute(
     val id: Long
 )
 
 //SaleNotes
 @Serializable
-object ServiceNoteRoute
+object ClaseRoute
 
 @Serializable
-object ServiceNoteCreateRoute
+object ClaseCreateRoute
 
 @Serializable
-data class ServiceNoteEditRoute(
+data class ClaseEditRoute(
     val id: Long
 )
 
 @Serializable
-data class ServiceNoteShowRoute(
+data class ClaseShowRoute(
     val id: Long
 )
 @Serializable
-data class  ServiceNoteDetailCreateRoute(
+data class  DetalleClaseCreateRoute(
     val id: Long
 )
 @Serializable
-data class  ServiceNoteDetailEditRoute(
-    val serviceNoteId: Long,
-    val productId: Long
-)
-
-//ReminderNote
-@Serializable
-data class ReminderNoteCreateRoute(
-    val serviceNoteId: Long
-)
-
-@Serializable
-object ReminderNoteRoute
-
-@Serializable
-data class ReminderNoteEditRoute(
-    val serviceNoteId: Long
+data class  DetalleClaseEditRoute(
+    val clase_id: Long,
+    val alumno_id: Long
 )
 
 

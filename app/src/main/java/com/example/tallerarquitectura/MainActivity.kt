@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.example.tallerarquitectura.dblocal.CarAtelierApp
+import com.example.tallerarquitectura.dblocal.AttendanceControlApp
 import com.example.tallerarquitectura.ui.UiProvider
 import com.example.tallerarquitectura.ui.theme.TallerArquitecturaTheme
 import com.example.tallerarquitectura.controller.ControllerProvider
@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
 
             val controllerProvider= ControllerProvider()
 
-            CarAtelierApp(controllerProvider, uiProvider)
+            AttendanceControlApp(controllerProvider, uiProvider)
         }
     }
 }
