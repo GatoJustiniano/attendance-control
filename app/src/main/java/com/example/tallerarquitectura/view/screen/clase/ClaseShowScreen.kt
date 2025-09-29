@@ -64,7 +64,7 @@ import com.example.tallerarquitectura.ui.UiAppViewModel
 import com.example.tallerarquitectura.view.View
 import com.example.tallerarquitectura.view.navigation.DetalleClaseCreateRoute
 import com.example.tallerarquitectura.view.navigation.DetalleClaseEditRoute
-import com.example.tallerarquitectura.view.screen.service_note.ClaseCard
+import com.example.tallerarquitectura.view.screen.clase.ClaseCard
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -186,23 +186,8 @@ fun PreviewClaseShowScreen() {
             classCreate = "varius",
             qrCode = "suscipit",
             grupo = null,
-            nateria = Materia(
-                id = 1657, name = "Pat Fletcher"
-            ),
             horario = Horario(1, "pr", starttime = "10", endtime = "11"),
-            detail = listOf(
-                DetalleClase(
-                    code = 1463,
-                    alumno_id = 4669,
-                    clase_id = 1,
-                    alumno = Alumno(
-                        id = 4669,
-                        name = "Kathrine Kemp",
-                        urlImage = "otro"
-                    )
-                )
-            )
-
+            materia = Materia(1, "al")
         ),
 
         listener = ClaseController(

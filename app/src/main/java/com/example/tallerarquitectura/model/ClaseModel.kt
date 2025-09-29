@@ -58,10 +58,9 @@ class ClaseModel(private val detalleClaseModel: DetalleClaseModel= DetalleClaseM
             val materiaName = it.getColumnIndexOrThrow("MateriaName")
 
             val horarioID = it.getColumnIndexOrThrow("HorarioID")
-            val carPlate = it.getColumnIndexOrThrow("HorarioName")
-            val carMark = it.getColumnIndexOrThrow("HorarioStartTime")
-            val carAlias = it.getColumnIndexOrThrow("HorarioEndTime")
-            val horarioModel = it.getColumnIndexOrThrow("HorarioModel")
+            val horarioName = it.getColumnIndexOrThrow("HorarioName")
+            val horarioStart = it.getColumnIndexOrThrow("HorarioStartTime")
+            val horarioEnd = it.getColumnIndexOrThrow("HorarioEndTime")
 
             val grupoID = it.getColumnIndexOrThrow("GrupoID")
             val grupoName = it.getColumnIndexOrThrow("GrupoName")
@@ -78,9 +77,9 @@ class ClaseModel(private val detalleClaseModel: DetalleClaseModel= DetalleClaseM
 
                 val horario = Horario(
                     id = it.getLong(horarioID),
-                    name = it.getString(carPlate),
-                    starttime = it.getString(carMark),
-                    endtime = it.getStringOrNull(carAlias)
+                    name = it.getString(horarioName),
+                    starttime = it.getString(horarioStart),
+                    endtime = it.getStringOrNull(horarioEnd)
                 )
 
                 val materia = Materia(
@@ -126,7 +125,7 @@ class ClaseModel(private val detalleClaseModel: DetalleClaseModel= DetalleClaseM
             c.${AttendanceControlData.Horario.COLUMN_NAME_ENDTIME} AS HorarioEndTime,
             
             e.${AttendanceControlData.Grupo.COLUMN_NAME_ID} AS GrupoID,
-            e.${AttendanceControlData.Grupo.COLUMN_NAME_NAME} AS GrupoName,                       
+            e.${AttendanceControlData.Grupo.COLUMN_NAME_NAME} AS GrupoName                       
 
         FROM ${AttendanceControlData.Clase.TABLE_NAME} sn
         JOIN ${AttendanceControlData.Materia.TABLE_NAME} s
@@ -216,8 +215,8 @@ class ClaseModel(private val detalleClaseModel: DetalleClaseModel= DetalleClaseM
         )
     }
     private fun buildGrupo(cursor: Cursor): Grupo? {
-        val enterpriseIdCol = "ClaseID"
-        return if (cursor.isNull(cursor.getColumnIndexOrThrow(enterpriseIdCol))) {
+        val grupoIdCol = "ClaseID"
+        return if (cursor.isNull(cursor.getColumnIndexOrThrow(grupoIdCol))) {
             null
         } else {
             Grupo(

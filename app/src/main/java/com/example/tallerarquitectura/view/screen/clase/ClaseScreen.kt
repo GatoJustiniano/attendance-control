@@ -1,4 +1,4 @@
-package com.example.tallerarquitectura.view.screen.service_note
+package com.example.tallerarquitectura.view.screen.clase
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
