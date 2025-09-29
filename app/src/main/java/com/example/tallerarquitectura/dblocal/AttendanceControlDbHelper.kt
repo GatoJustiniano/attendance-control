@@ -116,21 +116,22 @@ class AttendanceControlDbHelper(context: Context) :
         if (oldVersion < 3) {
             db.execSQL(SQL_CREATE_GRUPOS)
         }
-        if (oldVersion<4){
+        if (oldVersion < 4) {
             db.execSQL(SQL_CREATE_HORARIOS)
         }
-        if (oldVersion<5){
+        if (oldVersion < 5) {
             db.execSQL(SQL_CREATE_HORARIOS)
         }
-        if(oldVersion<6){
+        if (oldVersion < 6) {
             db.execSQL(SQL_CREATE_ALUMNOS)
         }
-        if (oldVersion<7){
+        if (oldVersion < 7) {
             db.execSQL(SQL_CREATE_CLASES)
         }
-        if (oldVersion<8){
+        if (oldVersion < 8) {
             db.execSQL(SQL_CREATE_DETALLE_CLASES)
         }
+    }
 
 }
 

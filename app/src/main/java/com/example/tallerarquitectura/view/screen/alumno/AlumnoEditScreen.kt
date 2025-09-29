@@ -130,7 +130,7 @@ private fun ProductEditScreenPreview() {
     AlumnoEditScreen(
         alumno = Alumno(
             id = 2465,
-            name = "Shelby Valentine"
+            name = "Shelby Valentine",
             urlImage = "https://search.yahoo.com/search?p=moderatius"
         ),
         ControllerProvider().alumnoController,

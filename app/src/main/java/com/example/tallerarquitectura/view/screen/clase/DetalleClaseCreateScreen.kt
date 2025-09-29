@@ -94,7 +94,7 @@ fun DetalleClaseCreateScreen(
                 .padding(innerPadding)
         ) {
             Text(
-                "Formulario de creacion",
+                "Formulario de creación",
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
             )
             if (errors.value.any()) {
@@ -184,13 +184,13 @@ private fun ServiceNoteDetailCreateScreenPreview() {
         1,
         alumnos = listOf(
             Alumno(
-                id = 6046, name = "Les Griffin", detail = "leo", urlImage = "https://search.yahoo.com/search?p=invidunt"
+                id = 6046, name = "Les Griffin", urlImage = "https://search.yahoo.com/search?p=invidunt"
             ),
             Alumno(
-                id = 7453, name = "Carlo Doyle", detail = "tacimates", urlImage = "https://search.yahoo.com/search?p=audire"
+                id = 7453, name = "Carlo Doyle", urlImage = "https://search.yahoo.com/search?p=audire"
             ),
             Alumno(
-                id = 7210, name = "Bettie Butler", detail = "commodo", urlImage = "https://search.yahoo.com/search?p=reque"
+                id = 7210, name = "Bettie Butler", urlImage = "https://search.yahoo.com/search?p=reque"
 
             )
         ),

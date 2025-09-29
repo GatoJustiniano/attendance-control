@@ -171,7 +171,6 @@ fun GrupoScreen(
                                 modifier = Modifier.padding(start = 16.dp)
                             ) {
                                 Text(it.name, style = MaterialTheme.typography.titleSmall)
-                                Text(it.locationName?:"Sin ubicacion", style = MaterialTheme.typography.bodyMedium)
                             }
                         }
 

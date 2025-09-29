@@ -54,7 +54,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
-fun ServiceScreen(
+fun MateriaScreen(
     materias: List<Materia> = emptyList<Materia>(),
     listener: ActionListener<Materia>,
     uiProvider: UiProvider
@@ -185,7 +185,7 @@ fun ServiceScreen(
 
 @Composable
 @Preview(showBackground = true)
-private fun ServiceScreenPreview() {
+private fun MateriaScreenPreview() {
             val data=listOf<Materia>(
             Materia(
                 id = 1,
@@ -204,7 +204,7 @@ private fun ServiceScreenPreview() {
     val navHostController = rememberNavController()
     val uiAppViewModel= UiAppViewModel()
     val uiProvider= UiProvider(uiAppViewModel)
-    ServiceScreen(
+    MateriaScreen(
         data,
         ControllerProvider().materiaController,
         uiProvider = uiProvider

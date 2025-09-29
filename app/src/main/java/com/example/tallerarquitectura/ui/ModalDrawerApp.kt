@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import com.example.tallerarquitectura.view.navigation.ModuleApp
-import com.example.tallerarquitectura.view.navigation.ReminderNoteRoute
 import com.example.tallerarquitectura.view.navigation.ClaseRoute
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -71,12 +70,12 @@ fun ModalDrawerApp(
             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
             Text(
-                "Servicios",
+                "Asistencia",
                 modifier = Modifier.padding(16.dp),
                 style = MaterialTheme.typography.titleMedium
             )
             NavigationDrawerItem(
-                label = { Text("Nota de servicios") },
+                label = { Text("Clase") },
                 selected = false,
                 icon = { Icon(Icons.Outlined.Settings, contentDescription = null) },
                 onClick = {
@@ -84,16 +83,6 @@ fun ModalDrawerApp(
                     onCloseDrawer()
                 }
             )
-            NavigationDrawerItem(
-                label = { Text("Recordatorios") },
-                selected = false,
-                icon = { Icon(Icons.Outlined.Notifications, contentDescription = null) },
-                onClick = {
-                    onNavigateToRoute(ReminderNoteRoute)
-                    onCloseDrawer()
-                }
-            )
-
             Spacer(Modifier.height(12.dp))
         }
     }

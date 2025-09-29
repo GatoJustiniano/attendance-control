@@ -1,5 +1,8 @@
 package com.example.tallerarquitectura.view.screen.clase
 
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.gestures.waitForUpOrCancellation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -7,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DropdownMenuItem
@@ -25,9 +29,14 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -52,9 +61,15 @@ import com.example.tallerarquitectura.model.ClaseModel
 import com.example.tallerarquitectura.validation.claseFormValidate
 import com.example.tallerarquitectura.ui.UiAppViewModel
 import com.example.tallerarquitectura.view.View
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+
+import java.time.ZoneOffset
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -410,7 +425,7 @@ fun DatePickerFieldToModal(
 }
 
 fun convertMillisToDate(millis: Long): String {
-    val formatter = SimpleDateFormat("dd/MM/yyyy",Locale.getDefault())
+    val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
     formatter.timeZone= TimeZone.getTimeZone("UTC")
     return formatter.format(Date(millis))
 }
@@ -423,7 +438,7 @@ fun convertMillisToDateDb(millis: Long): String {
 
 @Composable
 @Preview
-private fun ServiceNoteCreateScreenPreview() {
+private fun ClaseCreateScreenPreview() {
     val context = LocalContext.current
     val navHostController = rememberNavController()
     val uiAppViewModel = UiAppViewModel()
@@ -446,38 +461,25 @@ private fun ServiceNoteCreateScreenPreview() {
         grupos = listOf(
             Grupo(
                 id = 8017,
-                name = "Tony Newman",
-                locationName = "Chuck Marsh",
-                latitude = 4.5,
-                longitude = 6.7,
-                urlImage = "https://search.yahoo.com/search?p=ponderum"
+                name = "Tony Newman"
 
             ),
             Grupo(
                 id = 5126,
-                name = "Basil Howell",
-                locationName = "Stevie Lancaster",
-                latitude = 12.13,
-                longitude = 14.15,
-                urlImage = "https://www.google.com/#q=efficiantur"
+                name = "Basil Howell"
             ),
             Grupo(
                 id = 8017,
-                name = "Tony Newman",
-                locationName = "Chuck Marsh",
-                latitude = 4.5,
-                longitude = 6.7,
-                urlImage = null
+                name = "Tony Newman"
             )
         ),
         materias = listOf(
             Materia(
                 id = 6946,
-                name = "Gwen Boyle",
-                urlImage = "http://www.bing.com/search?q=libero"
+                name = "Gwen Boyle"
             ),
             Materia(
-                id = 2299, name = "Willie Riddle", urlImage = "https://www.google.com/#q=ultrices"
+                id = 2299, name = "Willie Riddle"
 
             )
         ),

@@ -13,6 +13,10 @@ class ControllerProvider(
     private val context: Context = MainActivity.Companion.appContext
 ) {
 
+    val materiaController = MateriaController(
+        materiaModel = MateriaModel(),
+        view = View()
+    )
     val grupoController = GrupoController(
         grupoModel = GrupoModel(),
         view = View()
@@ -26,10 +30,10 @@ class ControllerProvider(
         view = View()
     )
     val claseController= ClaseController(
-        claseModel = ClaseModel(),
         materiaModel = MateriaModel(),
-        horarioModel = HorarioModel(),
         grupoModel = GrupoModel(),
+        horarioModel = HorarioModel(),
+        claseModel = ClaseModel(),
         view = View(),
         alumnoModel = AlumnoModel(),
     )

@@ -33,8 +33,6 @@ import com.example.tallerarquitectura.dto.Horario
 import com.example.tallerarquitectura.validation.horarioFormValidate
 import com.example.tallerarquitectura.controller.ControllerProvider
 import com.example.tallerarquitectura.ui.UiAppViewModel
-import com.example.tallerarquitectura.view.screen.horario.DatePickerFieldToModal
-import com.example.tallerarquitectura.view.screen.horario.convertMillisToDateDb
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,14 +43,14 @@ fun HorarioEditScreen(
     uiProvider: UiProvider,
 ) {
     val name = remember { mutableStateOf(horario.name) }
-    val starttime=remember { mutableStateOf(horario.starttime) }
+    val starttime = remember { mutableStateOf(horario.starttime?:"") }
     val endtime = remember { mutableStateOf(horario.endtime?:"") }
 
     val errors = remember { mutableStateOf<List<String>>(emptyList()) }
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Vehiculo") },
+                title = { Text("Horario") },
                 navigationIcon = {
                     IconButton(onClick = {
                         MainActivity.navManager.popBackStack()
@@ -117,17 +115,21 @@ fun HorarioEditScreen(
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, capitalization = KeyboardCapitalization.Characters)
                 )
 
-                DatePickerFieldToModal(
-                    initialDate = LocalDate.parse(clase.starttime).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
-                ){
-                    starttime.value = convertMillisToDateDb(it)
-                }
+                OutlinedTextField(
+                    value = starttime.value,
+                    onValueChange = { starttime.value = it },
+                    label = { Text("Desde") },
+                    modifier = Modifier.fillMaxWidth(),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, capitalization = KeyboardCapitalization.Characters)
+                )
 
-                DatePickerFieldToModal(
-                    initialDate = LocalDate.parse(clase.endtime).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
-                ){
-                    endtime.value = convertMillisToDateDb(it)
-                }
+                OutlinedTextField(
+                    value = endtime.value,
+                    onValueChange = { endtime.value = it },
+                    label = { Text("Desde") },
+                    modifier = Modifier.fillMaxWidth(),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, capitalization = KeyboardCapitalization.Characters)
+                )
             }
 
         }
@@ -138,7 +140,7 @@ fun HorarioEditScreen(
 
 @Composable
 @Preview
-private fun CarEditScreenPreview() {
+private fun HorarioEditScreenPreview() {
     val navHostController = rememberNavController()
     val uiAppViewModel= UiAppViewModel()
     val uiProvider= UiProvider(uiAppViewModel)

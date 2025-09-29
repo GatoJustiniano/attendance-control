@@ -62,7 +62,7 @@ class GrupoController(private val grupoModel: GrupoModel, private val view: View
 
             if(grupo==null){
                 return view.render {
-                    NotFoundScreen("No se encontro la empresa",view.getUiProvider())
+                    NotFoundScreen("No se encontró el grupo",view.getUiProvider())
                 }
             }
             return view.render {
@@ -71,7 +71,7 @@ class GrupoController(private val grupoModel: GrupoModel, private val view: View
         } catch (ex: Exception) {
             Log.d("GrupoController.edit", ex.message.toString())
             return view.render {
-                InternalErrorScreen("Error al intentar cargar la empresa",view.getUiProvider())
+                InternalErrorScreen("Error al intentar cargar el grupo",view.getUiProvider())
             }
         }
     }

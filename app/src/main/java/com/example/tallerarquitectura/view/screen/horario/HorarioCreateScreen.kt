@@ -1,13 +1,16 @@
 package com.example.tallerarquitectura.view.screen.horario
 
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.gestures.waitForUpOrCancellation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -18,9 +21,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -34,9 +42,15 @@ import com.example.tallerarquitectura.dto.Horario
 import com.example.tallerarquitectura.validation.horarioFormValidate
 import com.example.tallerarquitectura.controller.ControllerProvider
 import com.example.tallerarquitectura.ui.UiAppViewModel
-import com.example.tallerarquitectura.view.screen.clase.DatePickerFieldToModal
+import com.example.tallerarquitectura.view.screen.clase.DatePickerModal
 import com.example.tallerarquitectura.view.screen.clase.convertMillisToDateDb
+import java.text.SimpleDateFormat
+import java.time.LocalDate
 
+import java.time.ZoneOffset
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,7 +67,7 @@ fun HorarioCreateScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Vehiculo") },
+                title = { Text("Horario") },
                 navigationIcon = {
                     IconButton(onClick = {
                         MainActivity.navManager.popBackStack()
@@ -112,18 +126,26 @@ fun HorarioCreateScreen(
                 OutlinedTextField(
                     value = name.value,
                     onValueChange = { name.value = it },
-                    label = { Text("Placa") },
+                    label = { Text("Nombre") },
                     modifier = Modifier.fillMaxWidth(),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, capitalization = KeyboardCapitalization.Characters)
                 )
 
-                DatePickerFieldToModal{
-                    starttime.value = convertMillisToDateDb(it)
-                }
+                OutlinedTextField(
+                    value = starttime.value,
+                    onValueChange = { starttime.value = it },
+                    label = { Text("Desde") },
+                    modifier = Modifier.fillMaxWidth(),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, capitalization = KeyboardCapitalization.Characters)
+                )
 
-                DatePickerFieldToModal{
-                    endtime.value = convertMillisToDateDb(it)
-                }
+                OutlinedTextField(
+                    value = endtime.value,
+                    onValueChange = { endtime.value = it },
+                    label = { Text("Hasta") },
+                    modifier = Modifier.fillMaxWidth(),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, capitalization = KeyboardCapitalization.Characters)
+                )
 
             }
 
@@ -135,7 +157,7 @@ fun HorarioCreateScreen(
 
 @Composable
 @Preview
-private fun CarCreateScreenPreview() {
+private fun HorarioCreateScreenPreview() {
     val navHostController = rememberNavController()
     val uiAppViewModel= UiAppViewModel()
     val uiProvider= UiProvider(uiAppViewModel)
@@ -143,62 +165,4 @@ private fun CarCreateScreenPreview() {
         ControllerProvider().horarioController,
         uiProvider = uiProvider
     )
-}
-
-@Composable
-fun DatePickerFieldToModal(
-    modifier: Modifier = Modifier,
-    initialDate: Long=LocalDate.now().atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli(),
-    onDateSelected: (Long) -> Unit,
-) {
-    var selectedDate by remember { mutableLongStateOf(initialDate) }
-    var showModal by remember { mutableStateOf(false) }
-
-    OutlinedTextField(
-        value = //selectedDate.toString(),
-        convertMillisToDate(selectedDate),
-        onValueChange = { },
-        label = { Text("Fecha") },
-        placeholder = { Text("MM/DD/YYYY") },
-        trailingIcon = {
-            Icon(Icons.Default.DateRange, contentDescription = "Seleccione Fecha")
-        },
-        modifier = modifier
-            .fillMaxWidth()
-            .pointerInput(selectedDate) {
-                awaitEachGesture {
-                    // Modifier.clickable doesn't work for text fields, so we use Modifier.pointerInput
-                    // in the Initial pass to observe events before the text field consumes them
-                    // in the Main pass.
-                    awaitFirstDown(pass = PointerEventPass.Initial)
-                    val upEvent = waitForUpOrCancellation(pass = PointerEventPass.Initial)
-                    if (upEvent != null) {
-                        showModal = true
-                    }
-                }
-            }
-    )
-
-    if (showModal) {
-        DatePickerModal(
-            onDateSelected = {
-                val dateLocal=it?: LocalDate.now().atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
-                selectedDate = dateLocal
-                onDateSelected(dateLocal)
-            },
-            onDismiss = { showModal = false }
-        )
-    }
-}
-
-fun convertMillisToDate(millis: Long): String {
-    val formatter = SimpleDateFormat("dd/MM/yyyy",Locale.getDefault())
-    formatter.timeZone= TimeZone.getTimeZone("UTC")
-    return formatter.format(Date(millis))
-}
-
-fun convertMillisToDateDb(millis: Long): String {
-    val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-    formatter.timeZone= TimeZone.getTimeZone("UTC")
-    return formatter.format(Date(millis))
 }

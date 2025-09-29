@@ -86,7 +86,7 @@ fun AlumnoCreateScreen(
 
 
             Text(
-                "Formulario de creacion",
+                "Formulario de creación",
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
             )
             if (errors.value.any()) {

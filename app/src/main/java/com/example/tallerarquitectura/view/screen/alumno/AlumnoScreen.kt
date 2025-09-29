@@ -175,7 +175,6 @@ fun AlumnoScreen(
                                 modifier = Modifier.padding(start = 16.dp)
                             ) {
                                 Text(it.name, style = MaterialTheme.typography.titleSmall)
-                                Text(it.detail?:"Sin detalles", style = MaterialTheme.typography.bodyMedium)
                             }
                         }
 

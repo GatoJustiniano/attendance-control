@@ -9,13 +9,8 @@ package com.example.tallerarquitectura.validation
         errors.add("Horario nombre es requerido.")
     }
     if (starttime.trim().isEmpty()) {
-        errors.add("Año es requerido.")
+        errors.add("Desde es requerido.")
     }
-    if(starttime.trim().isNotEmpty()){
-        val yearInt = starttime.toIntOrNull()
-        if (yearInt == null || yearInt < 1900 || yearInt > 2100) {
-            errors.add("Año no es válido.")
-        }
-    }
+    
     return errors
 }

@@ -85,8 +85,7 @@ class ClaseModel(private val detalleClaseModel: DetalleClaseModel= DetalleClaseM
 
                 val materia = Materia(
                     id = it.getLong(materiaID),
-                    name = it.getString(materiaName),
-                    urlImage = it.getStringOrNull(materiaUrlImage)
+                    name = it.getString(materiaName)
                 )
 
                 data.add(
@@ -127,12 +126,7 @@ class ClaseModel(private val detalleClaseModel: DetalleClaseModel= DetalleClaseM
             c.${AttendanceControlData.Horario.COLUMN_NAME_ENDTIME} AS HorarioEndTime,
             
             e.${AttendanceControlData.Grupo.COLUMN_NAME_ID} AS GrupoID,
-            e.${AttendanceControlData.Grupo.COLUMN_NAME_NAME} AS GrupoName,
-            e.${AttendanceControlData.Grupo.COLUMN_NAME_LOCATION_NAME} AS EnterpriseLocationName,
-            e.${AttendanceControlData.Grupo.COLUMN_NAME_LATITUDE} AS EnterpriseLatitude,
-            e.${AttendanceControlData.Grupo.COLUMN_NAME_LONGITUDE} AS EnterpriseLongitude,
-            e.${AttendanceControlData.Grupo.COLUMN_NAME_URL_IMAGE} AS EnterpriseUrlImage,
-                       
+            e.${AttendanceControlData.Grupo.COLUMN_NAME_NAME} AS GrupoName,                       
 
         FROM ${AttendanceControlData.Clase.TABLE_NAME} sn
         JOIN ${AttendanceControlData.Materia.TABLE_NAME} s

@@ -10,21 +10,21 @@ import com.example.tallerarquitectura.view.navigation.MateriaRoute
 import com.example.tallerarquitectura.view.screen.InternalErrorScreen
 import com.example.tallerarquitectura.view.screen.NotFoundScreen
 import com.example.tallerarquitectura.view.screen.materia.MateriaCreateScreen
-import com.example.tallerarquitectura.view.screen.materia.MateriaCreateScreen
-import com.example.tallerarquitectura.view.screen.materia.ServiceScreen
+import com.example.tallerarquitectura.view.screen.materia.MateriaEditScreen
+import com.example.tallerarquitectura.view.screen.materia.MateriaScreen
 
-class MateriaController(private val materiaModel: MateriaModel,private val view: View):
+class MateriaController(private val materiaModel: MateriaModel, private val view: View):
     ActionListener<Materia> {
     fun index(): @Composable () -> Unit {
         try {
             val materias = materiaModel.getAll()
             return view.render {
-                ServiceScreen(materias, this,view.getUiProvider())
+                MateriaScreen(materias, this,view.getUiProvider())
             }
         } catch (ex: Exception) {
             Log.d("MateriaController.index", ex.message.toString())
             return view.render {
-                InternalErrorScreen("Error al obtener los servicios, vuelva a intentarlo mas tarde.",view.getUiProvider())
+                InternalErrorScreen("Error al obtener las materias, vuelva a intentarlo mas tarde.",view.getUiProvider())
             }
         }
     }
@@ -60,16 +60,16 @@ class MateriaController(private val materiaModel: MateriaModel,private val view:
             val materia = materiaModel.getById(id)
             if(materia==null){
                 return view.render {
-                    NotFoundScreen("No se encontro el servicio",view.getUiProvider())
+                    NotFoundScreen("No se encontró la materia",view.getUiProvider())
                 }
             }
             return view.render {
-                MateriaCreateScreen(materia, this,view.getUiProvider())
+                MateriaEditScreen(materia, this,view.getUiProvider())
             }
         } catch (ex: Exception) {
             Log.d("MateriaController.edit", ex.message.toString())
             return view.render {
-                InternalErrorScreen("Error al intentar cargar el servicio",view.getUiProvider())
+                InternalErrorScreen("Error al intentar cargar materia",view.getUiProvider())
             }
         }
     }

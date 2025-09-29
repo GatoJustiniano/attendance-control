@@ -13,7 +13,7 @@ import com.example.tallerarquitectura.controller.ControllerProvider
 import com.example.tallerarquitectura.ui.ModalDrawerApp
 import com.example.tallerarquitectura.ui.UiAppViewModel
 import com.example.tallerarquitectura.view.navigation.AppNavGraph
-import com.example.tallerarquitectura.view.navigation.ReminderNoteRoute
+import com.example.tallerarquitectura.view.navigation.MateriaRoute
 import kotlinx.coroutines.launch
 
 @Composable
@@ -48,7 +48,7 @@ fun AttendanceControlApp(controllerProvider: ControllerProvider,uiProvider: UiPr
             drawerState = uiProvider.getUiAppViewModel().getDrawerState()
         ) {
             AppNavGraph(
-                startDestination = ReminderNoteRoute,
+                startDestination = MateriaRoute,
                 navController = MainActivity.Companion.navManager.getNaController(),
                 controllerProvider = controllerProvider
             )

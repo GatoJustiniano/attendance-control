@@ -42,7 +42,6 @@ fun GrupoEditScreen(
     uiProvider: UiProvider
 ) {
     val name = remember { mutableStateOf(grupo.name) }
-    val locationName = remember { mutableStateOf(grupo.locationName ?: "") }
 
     val errors = remember { mutableStateOf<List<String>>(emptyList()) }
     val context = LocalContext.current
@@ -126,7 +125,7 @@ private fun EnterpriseEditScreenEditScreenPreview() {
     val uiAppViewModel = UiAppViewModel()
     val uiProvider = UiProvider( uiAppViewModel)
     GrupoEditScreen(
-        grupo = Grupo(1, "Totyota", null, null, null, null),
+        grupo = Grupo(1, "Tarde"),
         listener = ControllerProvider().grupoController,
         uiProvider = uiProvider
     )

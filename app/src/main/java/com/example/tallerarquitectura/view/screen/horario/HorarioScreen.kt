@@ -69,7 +69,7 @@ fun HorarioScreen(
 
     Scaffold(topBar = {
         TopAppBar(
-            title = { Text("Vehiculos") },
+            title = { Text("Horarios") },
             navigationIcon = {
                 IconButton(onClick = {
                   coroutineScope.launch {
@@ -175,7 +175,7 @@ fun HorarioScreen(
                                 modifier = Modifier.padding(start = 16.dp)
                             ) {
                                 Text(it.name, style = MaterialTheme.typography.titleSmall)
-                                Text("${it.endtime?:"Sin endtime"} • ${it.starttime} • ${it.model} • ${it.year}", style = MaterialTheme.typography.bodyMedium)
+                                Text("${it.starttime?:"Sin desde"} • ${it.endtime} ", style = MaterialTheme.typography.bodyMedium)
                             }
                         }
 

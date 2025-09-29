@@ -64,6 +64,7 @@ import com.example.tallerarquitectura.ui.UiAppViewModel
 import com.example.tallerarquitectura.view.View
 import com.example.tallerarquitectura.view.navigation.DetalleClaseCreateRoute
 import com.example.tallerarquitectura.view.navigation.DetalleClaseEditRoute
+import com.example.tallerarquitectura.view.screen.service_note.ClaseCard
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)

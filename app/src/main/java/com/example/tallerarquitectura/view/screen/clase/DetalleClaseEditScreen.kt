@@ -196,19 +196,18 @@ private fun ServiceNoteDetailEditScreenPreview() {
             alumno = Alumno(
                 id = 2212,
                 name = "Maggie Heath",
-                detail = "nisl",
                 urlImage = "https://duckduckgo.com/?q=idque"
             )
         ),
         alumnos = listOf(
             Alumno(
-                id = 6046, name = "Les Griffin", detail = "leo", urlImage = "https://search.yahoo.com/search?p=invidunt"
+                id = 6046, name = "Les Griffin", urlImage = "https://search.yahoo.com/search?p=invidunt"
             ),
             Alumno(
-                id = 7453, name = "Carlo Doyle", detail = "tacimates", urlImage = "https://search.yahoo.com/search?p=audire"
+                id = 7453, name = "Carlo Doyle", urlImage = "https://search.yahoo.com/search?p=audire"
             ),
             Alumno(
-                id = 7210, name = "Bettie Butler", detail = "commodo", urlImage = "https://search.yahoo.com/search?p=reque"
+                id = 7210, name = "Bettie Butler", urlImage = "https://search.yahoo.com/search?p=reque"
 
             )
         ),

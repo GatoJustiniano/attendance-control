@@ -1,4 +1,4 @@
-package com.example.tallerarquitectura.view.screen.clase
+package com.example.tallerarquitectura.view.screen.service_note
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -237,6 +237,9 @@ fun ClaseCard(
             }
             Spacer(modifier = Modifier.height(8.dp))
 
+            // Attachment (Image or File)
+            AttachmentDisplay(attachment = clase.qrCode)
+
             Spacer(modifier = Modifier.height(16.dp))
 
             // Materia
@@ -337,7 +340,7 @@ fun AttachmentDisplay(attachment: Any?) {
                 )
             }
 
-            is String -> { // Assuming it's a file path or some other type
+            is String -> {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
@@ -372,4 +375,37 @@ fun AttachmentDisplay(attachment: Any?) {
             color = Color.Gray
         )
     }
+}
+
+@Composable
+@Preview(showBackground = true)
+private fun ClaseScreenPreview() {
+    val data = listOf<Clase>(
+        Clase(
+            1, "2024-04-10", "2024-04-10", "54545",
+            materia = Materia(1, "Materia1"),
+            grupo = null,
+            horario = Horario(1, "Horario", "11:00", "12:30"),
+        )
+    )
+    val context = LocalContext.current
+    val navHostController = rememberNavController()
+    val uiAppViewModel = UiAppViewModel()
+    val uiProvider = UiProvider(uiAppViewModel)
+    ClaseScreen(
+        data,
+        listener = ClaseController(
+            claseModel = ClaseModel(DetalleClaseModel(
+                AttendanceControlDbHelper.getInstance(
+                    context
+                )
+            ),AttendanceControlDbHelper.getInstance(context)),
+            materiaModel = MateriaModel(AttendanceControlDbHelper.getInstance(context)),
+            horarioModel = HorarioModel(AttendanceControlDbHelper.getInstance(context)),
+            alumnoModel = AlumnoModel(AttendanceControlDbHelper.getInstance(context)),
+            grupoModel = GrupoModel(AttendanceControlDbHelper.getInstance(context)),
+            view = View(uiProvider)
+        ),
+        uiProvider = uiProvider
+    )
 }

@@ -33,14 +33,14 @@ class ClaseController(
 
     fun index(): @Composable () -> Unit {
         try {
-            val servicesNotes = claseModel.getAll()
+            val clases = claseModel.getAll()
             return view.render {
-                ClaseScreen(servicesNotes, this, view.getUiProvider())
+                ClaseScreen(clases, this, view.getUiProvider())
             }
         } catch (ex: Exception) {
             Log.d("ClaseController.index", ex.message.toString())
             return view.render {
-                InternalErrorScreen("Intente mas tarde.", view.getUiProvider())
+                InternalErrorScreen("Intente mas tarde, parece que no hay.", view.getUiProvider())
             }
         }
     }
@@ -59,7 +59,7 @@ class ClaseController(
             val clase = claseModel.getById(id)
             if (clase == null) {
                 return view.render {
-                    NotFoundScreen("No se encontro la clase", view.getUiProvider())
+                    NotFoundScreen("No se encontró la clase", view.getUiProvider())
                 }
             }
             val materias = materiaModel.getAll()
